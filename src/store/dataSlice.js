@@ -6,33 +6,37 @@ const initialState = {
     error: null,
 };
 
+export const fetchData = createAsyncThunk("allData/fetchData", async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+    const data = await response.json()
+    return data
+    
+})
+
+
  const dataSlice = createSlice({
     name: "allData",
     initialState,
     reducer:{},
     extraReducers: (builder) => {
     builder
-    .addCase(
-      fetchData.fulfilled,
-      (state, action) => {
-        state.isLoading = false
-        state.error = null
-        state.posts = action.payload
-    })
-    .addCase(
-      fetchData.pending,
-      (state, action) => {
-        state.posts = action.payload
-        state.error = null
-        state.isLoading = true;
-    })
+    .addCase(fetchData.fulfilled, (state, action) => {
+    state.isLoading = false
+    state.error = null
+    state.posts = action.payload 
+})
+    .addCase(fetchData.pending, (state) => {
+         state.isLoading = true;
+         state.error = null;
+  
+})
       
     .addCase(
       fetchData.rejected,
       (state, action) => {
-        state.posts = action.payload
-        state.isLoading = false;
+          state.isLoading = false;
         state.error = action.error.message;
+      
     });
       
       }
@@ -40,12 +44,6 @@ const initialState = {
   },
 )
 
-export const fetchData = createAsyncThunk("allData/fetchData", async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts")
-    const data = await response.json()
-    return data
-    
-})
 
 
 export  const dataReducer = dataSlice.reducer;
