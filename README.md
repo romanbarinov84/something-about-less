@@ -58,5 +58,7 @@ rejected: сохраняется ошибка
 
 или идёт загрузка
 → запрос не выполняется
+![Снимок экрана (4)](https://github.com/user-attachments/assets/b21b349c-f29a-420f-a817-45387cc7a30e)
+
 
 ![Снимок экрана (3)](https://github.com/user-attachments/assets/0e3b5eb9-56db-401a-8371-9a4b5d15ce2d)
