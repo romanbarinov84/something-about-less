@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "./store/dataSlice";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 
@@ -10,9 +10,11 @@ function App() {
   const dispatch = useDispatch();
   //const isLoading = useSelector((state) => state.data.isLoading)
   //const error = useSelector((state) => state.data.error)
+  const fetchPromise = useRef()
+
 
   const fetchPosts = () => {
-    dispatch(fetchData())
+  fetchPromise.current = dispatch(fetchData("https://jsonplaceholder.typicode.com/posts"));
   }
 
   const handleShowPosts = () => {
@@ -23,6 +25,12 @@ function App() {
     
   }
 
+  const handleCancelFetch = () => {
+   if(fetchPromise.current){
+    fetchPromise.current.abort()
+   }
+  }
+
 
   return (
   <>
@@ -30,6 +38,9 @@ function App() {
      <div className="buttons">
     <button onClick={fetchPosts} disabled={isLoading}>{isLoading ? "Загрузка" : "Загрузить посты"}</button>
     <button onClick={handleShowPosts}>Показать посты</button>
+    {isLoading && (
+      <button onClick={handleCancelFetch}>Отменить запрос</button>
+    )}
     {error && <p style={{color:"red"}}>Ошибка : {error}</p>}
     </div>
     <div className="textContent">
