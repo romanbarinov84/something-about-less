@@ -58,6 +58,9 @@ rejected: сохраняется ошибка
 
 или идёт загрузка
 → запрос не выполняется
+
+# (https://romanbarinov84.github.io/something-about-less/)
+
 ![Снимок экрана (4)](https://github.com/user-attachments/assets/b21b349c-f29a-420f-a817-45387cc7a30e)
 
 
